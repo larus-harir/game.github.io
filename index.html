@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/egjs-jquery-transform/2.0.0/transform.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'HangeulNuri-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'HangeulNuri-Bold';
+        }
+        
+        img {
+            object-fit: cover;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        body {
+            background-color: rgb(245, 245, 220);
+        }
+        
+        nav {
+            position: fixed;
+            display: flex;
+            z-index: 5;
+            height: 100vh;
+            width: 100px;
+            justify-content: space-around;
+            opacity: 0;
+        }
+        
+        nav ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        nav li {
+            text-align: center;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 150px;
+            border: black solid 2px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        
+        main {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        h1 {
+            text-align: center;
+            font-family: 'DungGeunMo';
+        }
+        
+        #text {
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            text-align: center;
+            z-index: 10;
+            padding-top: 35vh;
+            padding-bottom: 35vh;
+            color: transparent;
+        }
+        
+        #text button {
+            opacity: 0;
+            background-color: transparent;
+            border: white 1px solid;
+            color: white;
+            width: 20%;
+            height: 10%;
+            font-size: 1.5rem;
+        }
+        
+        .con {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            height: 100%;
+            z-index: 2;
+            justify-content: space-around;
+            align-content: space-around;
+        }
+        
+        #sub {
+            width: 100%;
+            height: 200vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            text-align: center;
+        }
+        
+        p {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .Rcon {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            opacity: 0;
+        }
+        
+        .Lcon {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            opacity: 0;
+        }
+        
+        .con img {
+            background-color: coral;
+            height: 300px;
+            width: 300px;
+        }
+        
+        #hot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            justify-content: center;
+        }
+        
+        #hot img {
+            width: 100%;
+            background-color: teal;
+            height: 400px;
+        }
+        
+        .a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-top: teal 3px solid;
+            border-bottom: teal 3px solid;
+            width: 80%;
+        }
+        
+        #popular {
+            height: 100vh;
+            width: 100%;
+            background-color: rgb(72, 72, 72);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        #popular ul {
+            width: 80%;
+            height: 40%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        
+        #popular li {
+            width: 25%;
+            height: 100%;
+        }
+        
+        #popular img {
+            width: 100%;
+            height: 100%;
+            transition: box-shadow 0.5s;
+            box-shadow: 0;
+        }
+        
+        #popular img:hover {
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        }
+        
+        footer {
+            width: 100%;
+            height: 50vh;
+            background-color: rgb(70, 60, 100);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        footer hr {
+            width: 80%;
+        }
+        
+        #top-footer {
+            width: 80%;
+            height: 45%;
+            flex-direction: column;
+            display: flex;
+            align-content: space-around;
+            justify-content: space-around;
+        }
+    </style>
+
+    <script>
+        $(function() {
+            AOS.init();
+            for (var i = 1; i <= 10; i++) {
+                $(".con" + i.toString()).css({
+                    width: "18%",
+                    height: "90%",
+                    backgroundColor: "white",
+                    transform: "scale(1.3, 1.3)"
+                })
+            }
+
+            var sc = [800, 1200, 700, 600, 500, 400, 900, 500, 1200, 700];
+            var $color = ["#5CB8E6", "#556BF2", "#589BFC", "#58F1FC", "#55F2D2", "#5CB8E6", "#556BF2", "#589BFC", "#58F1FC", "#55F2D2"];
+            for (var i = 0; i < sc.length; i++) {
+                setTimeout(function(sc, $color, i) {
+                    $('.con' + (i + 1).toString()).stop().animate({
+                        "transform": "scale(1.0,1.0)",
+                        backgroundColor: $color[i]
+                    }, sc[i]);
+                }, sc[i], sc, $color, i);
+            }
+            setTimeout(() => {
+                $('#text').stop().animate({
+                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                    color: "white",
+                    fontSize: "36px"
+                }, 1500)
+                $('#text button').stop().animate({
+                    opacity: "1"
+                }, 1500)
+            }, 2500)
+
+            $('#text button').stop().click(function() {
+                $('#text').animate({
+                    opacity: "0",
+                    left: "-300%"
+                }, 1000);
+                $('nav').animate({
+                    opacity: 1
+                }, 1200)
+            })
+
+            $('#text button').stop().hover(function() {
+                $(this).stop().animate({
+                    backgroundColor: "black",
+                    color: "white",
+                    borderColor: "black"
+                }, 500);
+            }, function() {
+                $(this).stop().animate({
+                    backgroundColor: "transparent",
+                    color: "white",
+                    borderColor: "white"
+                }, 500);
+            })
+
+            $('#popular li').stop().hover(function() {
+                $(this).stop().animate({
+                    transform: "scale(1.1)",
+                }, 500)
+            }, function() {
+                $(this).stop().animate({
+                    transform: "scale(1.0)",
+                }, 500)
+            })
+
+            var $main = $('main').position();
+            $('#m').stop().click(function() {
+                $('html, body').animate({
+                    scrollTop: $main.top
+                }, 400);
+            })
+            var $sub = $('#sub').position();
+            $('#s').stop().click(function() {
+                $('html, body').animate({
+                    scrollTop: $sub.top
+                }, 400);
+            })
+            var $hot = $('#hot').position();
+            $('#h').stop().click(function() {
+                $('html, body').animate({
+                    scrollTop: $hot.top
+                }, 400);
+            })
+            var $popluar = $('#popular').position();
+            $('#p').stop().click(function() {
+                $('html, body').animate({
+                    scrollTop: $popluar.top
+                }, 400);
+            })
+            var $footer = $('footer').position();
+            $('#f').stop().click(function() {
+                $('html, body').animate({
+                    scrollTop: $footer.top
+                }, 400);
+            })
+
+            $('nav li').stop().hover(function() {
+                $(this).stop().animate({
+                    backgroundColor: "rgb(255, 80, 80)",
+                }, 500)
+            }, function() {
+                $(this).stop().animate({
+                    backgroundColor: "transparent",
+                }, 500)
+            })
+
+            // $(window).scroll(function() {
+            //     if ($(this).scrollTop() > $main - 100) {
+            //         $nav.stop().css({
+            //             "background-color": "white",
+            //             "border-bottom": "none",
+            //             "box-shadow": "0 5px 7px #A4A4A4",
+            //         });
+            //         $nav.stop().animate({
+            //             "height": "55px",
+            //         }, 200)
+            //     } else {
+            //         $nav.stop().css({
+            //             "background-color": "coral",
+            //             "border-bottom": "white 1px solid",
+            //             "box-shadow": "none",
+            //         });
+            //         $nav.stop().animate({
+            //             "height": "75px",
+            //         }, 200)
+            //     }
+            // }); 이걸 응용하면 fade in up 직접 만들 수 있을 듯함 => 음.. 해봤는데 먼가 먼가 애매함 ㅇㅇ
+
+        })
+    </script>
+
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li id="m">main</li>
+            <li id="s">sub</li>
+            <li id="h">hot</li>
+            <li id="p">popluar</li>
+            <li id="f">footer</li>
+        </ul>
+    </nav>
+
+    <main>
+        <div id="text">
+            <h1>TEXT</h1>
+            <h4>sub_text</h4>
+            <br>
+            <button><h3>button</h3></button>
+        </div>
+        <!-- con들에 고티나 주목 받은 게임들 사진으로 -->
+        <ul class="con">
+            <li class="con1"></li>
+            <li class="con2"></li>
+            <li class="con3"></li>
+            <li class="con4"></li>
+            <li class="con5"></li>
+        </ul>
+        <ul class="con">
+            <li class="con6"></li>
+            <li class="con7"></li>
+            <li class="con8"></li>
+            <li class="con9"></li>
+            <li class="con10"></li>
+        </ul>
+        <ul class="con">
+            <li class="con1"></li>
+            <li class="con2"></li>
+            <li class="con3"></li>
+            <li class="con4"></li>
+            <li class="con5"></li>
+        </ul>
+    </main>
+
+    <!-- 최근 신작 -->
+    <ul id="sub">
+
+        <h2>asd</h2>
+
+        <li class="Rcon" data-aos="fade-up" data-aos-duration="1500">
+            <img src="https://source.unsplash.com/300x300/?nature,water">
+            <h2>1. asdf</h2>
+        </li>
+        <li class="Lcon" data-aos="fade-up" data-aos-duration="1500">
+            <h2>2. qwer</h2>
+            <img src="https://source.unsplash.com/300x300/?nature,tree">
+        </li>
+        <li class="Rcon" data-aos="fade-up" data-aos-duration="1500">
+            <img src="https://source.unsplash.com/300x300/?nature,cloud">
+            <h2>3. zxcv</h2>
+        </li>
+    </ul>
+    <!-- 주목받는 기대작 -->
+    <div id="hot">
+
+        <div class="a">
+            <h1>HOT</h1>
+            <h2>ABCDEF</h2>
+            <img src="https://source.unsplash.com/1200x1200/?nature,sunset" alt="">
+            <div class="news">
+                <ul>
+                    <li><a href="">AAAA</a></li>
+                    <li><a href="">CCCC</a></li>
+                </ul>
+                <ul>
+                    <li><a href="">BBBB</a></li>
+                    <li><a href="">DDDD</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="popular">
+        <ul>
+            <li>
+                <a href="https://source.unsplash.com/900x900/?nature,water" target="_blank"><img src="https://source.unsplash.com/900x900/?nature,water" alt=""></a>
+            </li>
+            <li>
+                <a href="https://source.unsplash.com/900x900/?nature,moon" target="_blank"><img src="https://source.unsplash.com/900x900/?nature,moon" alt=""></a>
+            </li>
+            <li>
+                <a href="https://source.unsplash.com/900x900/?nature,sun" target="_blank"><img src="https://source.unsplash.com/900x900/?nature,sun" alt=""></a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="https://source.unsplash.com/900x900/?nature,color" target="_blank"><img src="https://source.unsplash.com/900x900/?nature,color" alt=""></a>
+            </li>
+            <li>
+                <a href="https://source.unsplash.com/900x900/?nature,cat" target="_blank"><img src="https://source.unsplash.com/900x900/?nature,cat" alt=""></a>
+            </li>
+            <li>
+                <a href="https://source.unsplash.com/900x900/?nature,dog" target="_blank"><img src="https://source.unsplash.com/900x900/?nature,dog" alt=""></a>
+            </li>
+        </ul>
+
+    </div>
+
+    <footer>
+        <div id="top-footer">
+            <h2>name</h2>
+            <span>
+                <p>information</p>
+                <p>discord</p>
+                <p>email</p>
+            </span>
+        </div>
+        <hr>
+        <div id="bottom-footer">
+
+        </div>
+    </footer>
+
+</body>
+
+</html>
+<!-- 할 것
+    1. 사이드 가이드바 (이거 만들고 큰 추가는 거의 없을듯)
+    2. 이미지 삽입 (con부분이랑 popular는 다 하고 나머지는 상황보고)
+    3. fade in (일단 aos 사용하다가 fade in 빡세게 해보고 hot쪽 완성하기)
+-->
